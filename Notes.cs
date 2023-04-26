@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Test_Play
 {
@@ -10,7 +11,7 @@ namespace Test_Play
     {
         /*
             StopWatch
-            int stopWatch = 0;
+            float stopWatch = 0.0f;
             stopWatch += 5;
             Console.Clear();
             Console.Write(stopWatch);
