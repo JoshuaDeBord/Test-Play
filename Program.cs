@@ -27,7 +27,7 @@ namespace Test_Play
                         timerOn = false;
                         Console.Clear();
                         Console.WriteLine("Exiting...");
-                        Thread.Sleep(600);
+                        Thread.Sleep(800);
                         Console.Clear();
                         Everything();
                     }
@@ -151,6 +151,7 @@ namespace Test_Play
                     minute10 = (int)(Timer / 60);
                     second10 = (int)(Timer % 60);
                     Console.WriteLine("Timer is: " + minute10 + ":" + second10);
+                    Console.WriteLine("Press Backspace To Exit");
                     Thread.Sleep(1000);
                     Console.Clear();
 
@@ -193,7 +194,98 @@ namespace Test_Play
                     Timer -= 1;
                     minute5 = (int)(Timer / 60);
                     second5 = (int)(Timer % 60);
-                    Console.WriteLine(minute5 + ":" + second5);
+                    Console.WriteLine("Timer is: " + minute5 + ":" + second5);
+                    Console.WriteLine("Press Backspace To Exit");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+
+                    if (Timer == 1)
+                    {
+                        Console.WriteLine("Timer Ended");
+                        Console.WriteLine("Press Backspace To Exit");
+                        backSpacePress = Console.ReadKey().Key;
+                        if (backSpacePress == ConsoleKey.Backspace)
+                        {
+                            Everything();
+                            Console.Clear();
+                        }
+                        break;
+                    }
+
+                }
+
+            });
+        }
+
+
+        public static async Task TimerTime1Minutes()
+        {
+            await Task.Run(() =>
+            {
+                float Timer;
+
+                ConsoleKey backSpacePress;
+                Console.WriteLine("1 minutes is chosen");
+                Timer = 60.0f;
+                int minute1 = (int)(Timer / 60);
+                int second1 = (int)(Timer % 60);
+                Console.Clear();
+                Console.WriteLine("Timer is: 1:00");
+                Console.WriteLine("Press Backspace To Exit");
+                Thread.Sleep(1000);
+                Console.Clear();
+                while (timerOn)
+                {
+                    Timer -= 1;
+                    minute1 = (int)(Timer / 60);
+                    second1 = (int)(Timer % 60);
+                    Console.WriteLine("Timer is: " + minute1 + ":" + second1);
+                    Console.WriteLine("Press Backspace To Exit");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+
+                    if (Timer == 1)
+                    {
+                        Console.WriteLine("Timer Ended");
+                        Console.WriteLine("Press Backspace To Exit");
+                        backSpacePress = Console.ReadKey().Key;
+                        if (backSpacePress == ConsoleKey.Backspace)
+                        {
+                            Everything();
+                            Console.Clear();
+                        }
+                        break;
+                    }
+
+                }
+
+            });
+        }
+
+
+        public static async Task TimerTime30Seconds()
+        {
+            await Task.Run(() =>
+            {
+                float Timer;
+
+                ConsoleKey backSpacePress;
+                Console.WriteLine("30 seconds is chosen");
+                Timer = 30.0f;
+                int minutes30Seconds = (int)(Timer / 60);
+                int seconds30Seconds = (int)(Timer % 60);
+                Console.Clear();
+                Console.WriteLine("Timer is: 1:00");
+                Console.WriteLine("Press Backspace To Exit");
+                Thread.Sleep(1000);
+                Console.Clear();
+                while (timerOn)
+                {
+                    Timer -= 1;
+                    minutes30Seconds = (int)(Timer / 60);
+                    seconds30Seconds = (int)(Timer % 60);
+                    Console.WriteLine("Timer is: " + minutes30Seconds + ":" + seconds30Seconds);
+                    Console.WriteLine("Press Backspace To Exit");
                     Thread.Sleep(1000);
                     Console.Clear();
 
@@ -220,105 +312,57 @@ namespace Test_Play
         //From Here Down Is The Main Code ~~~
         private static void Everything()
         {
-            float Timer;
             ConsoleKey spacePress;
             ConsoleKey backSpacePress;
             while (true)
             {
-                Console.WriteLine("Type \"timer\", \"stopwatch\", or \"clock\".");
+                Console.Clear();
+                Console.WriteLine("Type: \n1 for timer, \n2 for stopwatch, \n3 for the clock.");
 
-                string clockChoice = Console.ReadLine();
+                ConsoleKeyInfo key = Console.ReadKey();
                 Console.Clear();
 
-                switch (clockChoice)
+                switch (key.KeyChar)
                 {
-                    case "timer":
+                    case '1':
                         while (true)
                         {
-
-                            Console.WriteLine("Choose what amount of minutes you want your timer to have. \nThe timer will start immediately once chosen. \nChoices are \"30sec\", \"1min\", \"5min\", \"10min\", \"30min\", \"1h\". ");
+                            Console.WriteLine("Loading Timer...");
+                            Thread.Sleep(800);
+                            Console.Clear();
+                            Console.WriteLine("Choose what amount of minutes you want your timer to have. \nThe timer will start immediately once chosen. " +
+                                "\nChoices are \"30sec\", \"1min\", \"5min\", \"10min\", \"30min\", \"1h\".\nOr type \"exit\" to exit.");
 
                             string timerChoice = Console.ReadLine();
 
                             switch (timerChoice)
                             {
                                 case ("30sec"):
-                                    Console.WriteLine("1 minute is chosen");
-                                    Timer = 30.0f;
-                                    Console.Clear();
-                                    Console.WriteLine("Timer is: 00:30");
-                                    Console.WriteLine("Press Backspace To Exit");
-                                    Thread.Sleep(1000);
-                                    Console.Clear();
-                                    while (true)
-                                    {
-                                        Timer -= 1;
-                                        Console.WriteLine("Timer is: 00:" + Timer);
-                                        Console.WriteLine("Press Backspace To Exit");
-                                        Thread.Sleep(1000);
-                                        Console.Clear();
+                                    Task task11 = TimerTime30Seconds();
+                                    timerOn = true;
+                                    Task task21 = BackSpace();
+                                    Task.WaitAll(task21);
 
-                                        if (Timer == 1)
-                                        {
-                                            spacePress = Console.ReadKey().Key;
-                                            if (spacePress == ConsoleKey.Backspace)
-                                            {
-                                                timerOn = false;
-                                                Console.Clear();
-                                                Console.WriteLine("Exiting...");
-                                                Thread.Sleep(600);
-                                                Console.Clear();
-                                                Everything();
-                                            }
-
-                                            break;
-                                        }
-
-                                    }
+                                    Task.WaitAll(task11);
                                     break;
-
-
 
                                 case ("1min"):
-                                    Console.WriteLine("1 minute is chosen");
-                                    Timer = 60.0f;
-                                    Console.Clear();
-                                    Console.WriteLine("Timer is: 1:00");
-                                    Console.WriteLine("Press Backspace To Exit");
-                                    Thread.Sleep(1000);
-                                    Console.Clear();
-                                    while (true)
-                                    {
-                                        Timer -= 1;
-                                        Console.WriteLine("Timer is: 00:" + Timer);
-                                        Console.WriteLine("Press Backspace To Exit");
-                                        Thread.Sleep(1000);
-                                        Console.Clear();
-
-                                        if (Timer == 1)
-                                        {
-                                            Console.WriteLine("Timer Ended");
-                                            Console.WriteLine("Press Backspace To Exit");
-                                            backSpacePress = Console.ReadKey().Key;
-                                            if (backSpacePress == ConsoleKey.Backspace)
-                                            {
-                                                Everything();
-                                                Console.Clear();
-                                            }
-                                            break;
-                                        }
-
-                                    }
-                                    break;
-
-                                case ("5min"):
-
-                                    Task task1 = TimerTime5Minutes();
+                                    Task task1 = TimerTime1Minutes();
                                     timerOn = true;
                                     Task task2 = BackSpace();
                                     Task.WaitAll(task2);
 
                                     Task.WaitAll(task1);
+                                    break;
+
+                                case ("5min"):
+
+                                    Task task15 = TimerTime5Minutes();
+                                    timerOn = true;
+                                    Task task25 = BackSpace();
+                                    Task.WaitAll(task25);
+
+                                    Task.WaitAll(task15);
 
 
                                     break;
@@ -354,6 +398,14 @@ namespace Test_Play
                                     Task.WaitAll(task11h);
                                     break;
 
+                                case "exit":
+                                    Console.WriteLine("Exiting...");
+                                    Thread.Sleep(600);
+                                    Everything();
+
+
+                                    break;
+
                                 default:
                                     Console.Clear();
                                     Console.WriteLine("That is not a valid Input.");
@@ -365,10 +417,13 @@ namespace Test_Play
                         break;
 
 
-                    case "stopwatch":
+                    case '2':
+                        Console.WriteLine("Loading StopWatch...");
                         while (true)
                         {
-
+                            
+                            Thread.Sleep(800);
+                            Console.Clear();
                             Console.WriteLine("\nPress the SpaceBar to start the stopwatch. Press Backspace to exit.");
                             spacePress = Console.ReadKey().Key;
                             if (spacePress == ConsoleKey.Spacebar)
@@ -383,8 +438,9 @@ namespace Test_Play
                                     Thread.Sleep(10);
                                     Console.Clear();
                                 }
-                                stopWatch.Stop();
+                                stopWatch.Start();
                                 Console.WriteLine("Stopwatch stopped! Total elasped time: {0}", stopWatch.Elapsed);
+                                Thread.Sleep(1000);
                                 Console.ReadKey();
                             }
                             else if (spacePress == ConsoleKey.Backspace)
@@ -403,9 +459,12 @@ namespace Test_Play
                         }
                         break;
 
-                    case "clock":
+                    case '3':
                         for (; ; )
                         {
+                            Console.WriteLine("Loading Clock...");
+                            Thread.Sleep(800);
+                            Console.Clear();
                             Console.WriteLine(DateTime.Now.ToString());
                             Console.WriteLine("Press any key to refresh. \nPress Backspace to exit.");
 
