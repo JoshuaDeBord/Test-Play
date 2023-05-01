@@ -309,6 +309,8 @@ namespace Test_Play
 
 
 
+
+
         //From Here Down Is The Main Code ~~~
         private static void Everything()
         {
@@ -415,33 +417,39 @@ namespace Test_Play
                             Console.Clear();
                         }
                         break;
+                        
 
 
                     case '2':
                         Console.WriteLine("Loading StopWatch...");
+                        Thread.Sleep(800);
+                        Console.Clear();
                         while (true)
                         {
+                            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
                             
-                            Thread.Sleep(800);
-                            Console.Clear();
+                            
                             Console.WriteLine("\nPress the SpaceBar to start the stopwatch. Press Backspace to exit.");
                             spacePress = Console.ReadKey().Key;
                             if (spacePress == ConsoleKey.Spacebar)
                             {
                                 Console.Clear();
-                                System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+                               
                                 stopWatch.Start();
                                 Console.WriteLine("Stopwatch Started. Press the SpaceBar to stop.");
                                 while (!Console.KeyAvailable)
                                 {
-                                    Console.WriteLine("Elasped Time: {0} \nPress spacebar to stop. \nPress Backspace to exit", stopWatch.Elapsed.ToString(@"hh\:mm\:ss\.fff"));
-                                    Thread.Sleep(10);
+                                    Console.WriteLine("Elasped Time: {0} \nPress spacebar to stop \nTo Exit, Stop the stopwatch then press Backspace", stopWatch.Elapsed.ToString(@"hh\:mm\:ss\.fff"));
+                                    Thread.Sleep(15);
                                     Console.Clear();
+                                    
                                 }
-                                stopWatch.Start();
+                                stopWatch.Stop();
                                 Console.WriteLine("Stopwatch stopped! Total elasped time: {0}", stopWatch.Elapsed);
-                                Thread.Sleep(1000);
+                                Thread.Sleep(4000);
                                 Console.ReadKey();
+                                Console.Clear();
+                                Console.WriteLine("Previous Timer: {0}", stopWatch.Elapsed);
                             }
                             else if (spacePress == ConsoleKey.Backspace)
                             {
@@ -450,12 +458,18 @@ namespace Test_Play
                                 Thread.Sleep(600);
                                 Console.Clear();
                                 Everything();
+                                
                             }
+                            
+
                             else
                             {
                                 Console.Clear();
                                 Console.WriteLine("That is an invalid input");
+                                Thread.Sleep(1300);
+                                Console.Clear();
                             }
+
                         }
                         break;
 
@@ -465,9 +479,13 @@ namespace Test_Play
                             Console.WriteLine("Loading Clock...");
                             Thread.Sleep(800);
                             Console.Clear();
-                            Console.WriteLine(DateTime.Now.ToString());
-                            Console.WriteLine("Press any key to refresh. \nPress Backspace to exit.");
-
+                            while (!Console.KeyAvailable)
+                            {
+                                Console.WriteLine(DateTime.Now.ToString());
+                                Console.WriteLine("Press any key to refresh. \nPress Backspace to exit.");
+                                Thread.Sleep(10);
+                                Console.Clear();
+                            }
                             backSpacePress = Console.ReadKey().Key;
 
                             if (backSpacePress == ConsoleKey.Backspace)
@@ -484,6 +502,7 @@ namespace Test_Play
                         }
                         break;
 
+                        
                     default:
                         Console.WriteLine("That is not a valid input.");
                         Thread.Sleep(700);
