@@ -461,7 +461,7 @@ namespace Test_Play
                                 Console.Clear();
                             }
 
-                        }
+                        } 
                         break;
 
                     case '3':
