@@ -9,7 +9,6 @@ namespace Test_Play
         private static bool timerOn;
         private static void Main(string[] args)
         {
-
             Everything();
         }
 
@@ -319,7 +318,7 @@ namespace Test_Play
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Type: \n1 for timer, \n2 for stopwatch, \n3 for the clock.");
+                Console.WriteLine("Type: \n0 to close \n1 for timer, \n2 for stopwatch, \n3 for the clock.");
 
                 ConsoleKeyInfo key = Console.ReadKey();
                 Console.Clear();
@@ -365,8 +364,6 @@ namespace Test_Play
                                     Task.WaitAll(task25);
 
                                     Task.WaitAll(task15);
-
-
                                     break;
 
                                 case ("10min"):
@@ -376,8 +373,6 @@ namespace Test_Play
                                     Task.WaitAll(task210);
 
                                     Task.WaitAll(task110);
-
-
                                     break;
 
                                 case ("30min"):
@@ -387,8 +382,6 @@ namespace Test_Play
                                     Task.WaitAll(task230);
 
                                     Task.WaitAll(task130);
-
-
                                     break;
 
                                 case ("1h"):
@@ -404,8 +397,6 @@ namespace Test_Play
                                     Console.WriteLine("Exiting...");
                                     Thread.Sleep(600);
                                     Everything();
-
-
                                     break;
 
                                 default:
@@ -417,7 +408,7 @@ namespace Test_Play
                             Console.Clear();
                         }
                         break;
-                        
+
 
 
                     case '2':
@@ -427,29 +418,29 @@ namespace Test_Play
                         while (true)
                         {
                             System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
-                            
-                            
-                            Console.WriteLine("\nPress the SpaceBar to start the stopwatch. Press Backspace to exit.");
+
+
+                            Console.WriteLine("\nPress the SpaceBar to start the stopwatch. \nPress Backspace to exit.");
                             spacePress = Console.ReadKey().Key;
                             if (spacePress == ConsoleKey.Spacebar)
                             {
                                 Console.Clear();
-                               
+
                                 stopWatch.Start();
                                 Console.WriteLine("Stopwatch Started. Press the SpaceBar to stop.");
                                 while (!Console.KeyAvailable)
                                 {
-                                    Console.WriteLine("Elasped Time: {0} \nPress spacebar to stop \nTo Exit, Stop the stopwatch then press Backspace", stopWatch.Elapsed.ToString(@"hh\:mm\:ss\.fff"));
-                                    Thread.Sleep(15);
+                                    Console.WriteLine("Elasped Time: {0} \nPress spacebar to stop \nTo Exit, Stop the stopwatch then press Backspace", stopWatch.Elapsed.ToString(@"dd\:hh\:mm\:ss\.ff"));
+                                    Thread.Sleep(35);
                                     Console.Clear();
-                                    
+
                                 }
                                 stopWatch.Stop();
-                                Console.WriteLine("Stopwatch stopped! Total elasped time: {0}", stopWatch.Elapsed);
+                                Console.WriteLine("Stopwatch stopped! \nTotal elasped time: {0}", stopWatch.Elapsed);
                                 Thread.Sleep(4000);
                                 Console.ReadKey();
                                 Console.Clear();
-                                Console.WriteLine("Previous Timer: {0}", stopWatch.Elapsed);
+                                Console.WriteLine("Previous Time: {0}", stopWatch.Elapsed);
                             }
                             else if (spacePress == ConsoleKey.Backspace)
                             {
@@ -457,10 +448,10 @@ namespace Test_Play
                                 Console.WriteLine("Exiting...");
                                 Thread.Sleep(600);
                                 Console.Clear();
-                                Everything();
-                                
+                                break;
+
                             }
-                            
+
 
                             else
                             {
@@ -502,7 +493,12 @@ namespace Test_Play
                         }
                         break;
 
-                        
+                    case '0':
+                        Console.WriteLine("Closing Now...");
+                        Thread.Sleep(700);
+                        Environment.Exit(0);
+                        break;
+
                     default:
                         Console.WriteLine("That is not a valid input.");
                         Thread.Sleep(700);
